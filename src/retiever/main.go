@@ -4,6 +4,7 @@ import (
 	"fmt"
 	real2 "retiever/real"
 	"time"
+	"retiever/mock"
 )
 
 type Retiever interface {
@@ -21,6 +22,12 @@ func main() {
 	var r Retiever
 	//r = mock.Retiever{"hello world"}
 	//fmt.Println(r)
+	mockRelation,ok := r.(mock.Retiever)
+	if !ok{
+		fmt.Println("1111")
+	}else{
+		fmt.Println(mockRelation.Content)
+	}
 
 	r = &real2.Retiever{
 		UserAgent:"Mozilla/5.0",
@@ -28,4 +35,11 @@ func main() {
 	}
 	//fmt.Println(download(r))
 	fmt.Printf("%T %v\n",r,r)
+
+	realteRelation := r.(*real2.Retiever)
+	fmt.Println(realteRelation.TimeOut)
+	fmt.Println(realteRelation.UserAgent)
+
+
+
 }
