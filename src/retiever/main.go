@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"retiever/mock"
 	real2 "retiever/real"
+	"time"
 )
 
 type Retiever interface {
@@ -19,9 +19,13 @@ func download(r Retiever)string  {
 
 func main() {
 	var r Retiever
-	r = mock.Retiever{"hello world"}
-	fmt.Println(r)
+	//r = mock.Retiever{"hello world"}
+	//fmt.Println(r)
 
-	r = real2.Retiever{}
-	fmt.Println(download(r))
+	r = &real2.Retiever{
+		UserAgent:"Mozilla/5.0",
+		TimeOut:time.Minute,
+	}
+	//fmt.Println(download(r))
+	fmt.Printf("%T %v\n",r,r)
 }
